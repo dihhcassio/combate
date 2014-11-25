@@ -22,13 +22,13 @@ public class Control : MonoBehaviour
 	private Transform groundCheck;			// A position marking where to check if the player is grounded.
 	private bool grounded = false;			// Whether or not the player is grounded.
 
-	private IAnimacao anim;
+	private Animator anim;
 	
 	void Awake()
 	{
 		// Setting up references.
 		groundCheck = transform.Find("groundCheck");
-		anim = (IAnimacao) GetComponent(typeof(IAnimacao));
+		anim = GetComponent<Animator> ();
 	}
 	
 	
@@ -69,16 +69,16 @@ public class Control : MonoBehaviour
 
 		if (anim != null) {
 			if (Mathf.Abs (rigidbody2D.velocity.x) > 0.1f) {
-				anim.correr ();
+				anim.SetBool("isCorrendo", true);
 			} else {
-				anim.parar ();
+				anim.SetBool("isCorrendo", false);
 			}
 		
 		
 			if (jump){
-				anim.pular();
+				anim.SetBool("isNoAr", true);
 			} else {
-				anim.cair();
+				anim.SetBool("isNoAr", false);
 			}
 		}
 
